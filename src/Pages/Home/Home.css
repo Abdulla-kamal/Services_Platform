@@ -1,0 +1,104 @@
+/* Start Global rules  */
+:root {
+    --main-color: #2196f3;
+    --main-color-alt: #1787e0;
+    --main-transition: 0.3s;
+    --main-padding: 100px;
+    --background-color: #ececec;
+  }
+
+/* End Global rules  */
+
+/* Start landing  */
+.landing {
+    padding-top: var(--main-padding);
+    padding-bottom: var(--main-padding);
+    position: relative;
+    height: 100vh;
+  }
+  
+  .landing::after {
+    content: "";
+    background-color: var(--background-color);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: -120px;
+    z-index: -1;
+    transform: skewY(-6deg);
+    transform-origin: top left;
+  }
+  
+  .landing .container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+  
+  .landing .container .content {
+    flex-basis: 45%;
+    align-self: center;
+  }
+  
+  .landing .container .content h1 {
+    font-size: 40px;
+    margin-bottom: 5px;
+    letter-spacing: -2px;
+  }
+  
+  .landing .container .content p {
+    font-size: 23px;
+    color: #666666;
+    line-height: 1.7;
+  }
+  
+  .landing .container .image {
+    flex-basis: 50%;
+  }
+  
+  @media (max-width: 992px) {
+    .landing .container {
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .landing .container .image {
+      display: none;
+    }
+  
+    .landing .container .content {
+      flex-basis: 70%;
+      text-align: center;
+    }
+  
+    .landing .container .content h1 {
+      margin-bottom: 15px;
+    }
+  }
+  
+  .landing .container .image img {
+    max-width: 100%;
+    position: relative;
+    animation-name: image-move;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+  
+  .landing .container > a {
+    color: var(--main-color);
+    position: absolute;
+    bottom: -180px;
+    left: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .landing .container > a > i {
+    animation-name: bouncing;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+  }
+  
+  /* End landing  */
+ 
