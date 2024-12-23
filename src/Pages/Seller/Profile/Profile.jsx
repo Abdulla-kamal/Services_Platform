@@ -9,52 +9,56 @@ import { useUser } from "../../../Context/UserProvider";
 
 export default function Profile() {
   const { user } = useUser();
-
+  // console.log(user)
   return (
     <>
       {user ? (
         <>
-      <Header />
-        <div class="testimonails" id="testimonails">
-          <div className="comtainer">
-            <div class="person">
-              <div className="image">
-                <img src="./media/youssif.png" alt="" />
-              </div>
-              <h2>{user && user.name}</h2>
-              {user && user.isSeller ? (
-                <span>Gamer</span>
-              ) : (
-                <span>Customer</span>
-              )}
+          <Header />
+          <div class="testimonails" id="testimonails">
+            <div className="comtainer">
+              <div className="person">
+                <div className="image">
+                  {user.picture ? (
+                    <img src={user && user.picture} alt="" />
+                  ) : (
+                    <img src="./media/youssif.png" alt="" />
+                  )}
+                </div>
+                <h2>{user && user.name}</h2>
+                {user && user.role === "Seller" ? (
+                  <span>Seller</span>
+                ) : (
+                  <span>Customer</span>
+                )}
 
-              <p>{user && user.description}</p>
-              <div className="soc">
-                <div className="social">
-                  <a href="http://">
-                    <img src="./media/twitter.png" alt="" />
-                  </a>
-                  <a href="http://">
-                    <img src="./media/facebook.png" alt="" />
-                  </a>
-                  <a href={user && user.linkedin}>
-                    <img src="./media/linkedin.png" alt="" />
-                  </a>
-                  <a href="http://">
-                    <img src="./media/pinterest.png" alt="" />
-                  </a>
-                  <a href="http://">
-                    <img src="./media/instagram.png" alt="" />
-                  </a>
+                <p>{user && user.description}</p>
+                <div className="soc">
+                  <div className="social">
+                    <a href="http://">
+                      <img src="./media/twitter.png" alt="" />
+                    </a>
+                    <a href="http://">
+                      <img src="./media/facebook.png" alt="" />
+                    </a>
+                    <a href={user && user.linkedin}>
+                      <img src="./media/linkedin.png" alt="" />
+                    </a>
+                    <a href="http://">
+                      <img src="./media/pinterest.png" alt="" />
+                    </a>
+                    <a href="http://">
+                      <img src="./media/instagram.png" alt="" />
+                    </a>
+                  </div>
                 </div>
               </div>
+              {user.services && <Service data={user} />}
             </div>
-           <Service />
           </div>
-        </div>
         </>
       ) : (
-        setTimeout(()=> <Loading /> , 10000)
+        <Loading />
       )}
     </>
   );

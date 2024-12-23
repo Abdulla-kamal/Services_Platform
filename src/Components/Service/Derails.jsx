@@ -1,6 +1,13 @@
 import Header from "../Header/Header";
+import {  useParams } from "react-router-dom";
 
 export default function Details() {
+  const {id} = useParams();
+
+  console.log(id)
+
+  // const { service } = location.state; // Access the passed service data
+  // console.log(service& service)
     return(
         <>
         <Header/>

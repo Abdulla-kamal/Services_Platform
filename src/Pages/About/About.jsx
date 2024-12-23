@@ -7,16 +7,16 @@ export default function About() {
   return (
     <>
       <Header />
-      <div class="how" id="how">
-        <h2 class="main-title">Abou us</h2>
-        <div class="container">
-          <div class="image">
+      <div className="how" id="how">
+        <h2 className="main-title">Abou us</h2>
+        <div className="container">
+          <div className="image">
             <img src="./media/how.png" alt="" />
           </div>
-          <div class="steps-work">
-            <div class="box">
+          <div className="steps-work">
+            <div className="box">
               <img src="./media/work-steps-1.png" alt="" />
-              <div class="text">
+              <div className="text">
                 <h3>Business Analysis</h3>
                 <p>
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -25,9 +25,9 @@ export default function About() {
                 </p>
               </div>
             </div>
-            <div class="box">
+            <div className="box">
               <img src="./media/work-steps-2.png" alt="" />
-              <div class="text">
+              <div className="text">
                 <h3>Business Analysis</h3>
                 <p>
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.
@@ -36,9 +36,9 @@ export default function About() {
                 </p>
               </div>
             </div>
-            <div class="box">
+            <div className="box">
               <img src="./media/work-steps-3.png" alt="" />
-              <div class="text">
+              <div className="text">
                 <h3>Business Analysis</h3>
                 <p>
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit.

@@ -10,27 +10,34 @@ import Details from "./Components/Service/Derails";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AddServiceForm from "./Components/Forms/AddServiceForm";
-
-
-
+import VisitProfile from "./Pages/Customer/VisitProfile";
+import SellerRoutes from "./RouteProtection/SellerRoutes";
+import CustomerRoutes from "./RouteProtection/CustomerRoutes";
 
 function App() {
-
   return (
     <div className="App">
-      
-        <ToastContainer />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="register" element={<Register />} />
-          <Route path="login" element={<Login />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="service" element={<DisplayServices />} />
-          <Route path="serviceDetails" element={<Details />} />
+      <ToastContainer />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="about" element={<About />} />
+        <Route path="register" element={<Register />} />
+        <Route path="login" element={<Login />} />
+        <Route path="profile" element={<Profile />} />
+
+        <Route path="serviceDetails/:id" element={<Details />} />
+
+        {/* Pages For Customer Only */}
+        <Route path="customer" element={<CustomerRoutes />}>
+          <Route path="services" element={<DisplayServices />} />
+        </Route>
+
+        {/* Pages For Seller Only */}
+        <Route path="seller" element={<SellerRoutes />}>
           <Route path="add_service" element={<AddServiceForm />} />
-        </Routes>
-    
+        </Route>
+        <Route path="seller/profile/:id" element={<VisitProfile />} />
+      </Routes>
     </div>
   );
 }

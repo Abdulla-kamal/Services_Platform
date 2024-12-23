@@ -72,7 +72,7 @@ export default function Login() {
       <div className="login">
         <form onSubmit={handleLogin}>
           <h1>Sign in</h1>
-          <label htmlFor="">Username</label>
+          <label htmlFor="">Email</label>
           <input
             name="email"
             placeholder="email"

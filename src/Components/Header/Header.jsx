@@ -5,7 +5,9 @@ import { useUser } from "../../Context/UserProvider";
 import Cookies from "universal-cookie";
 import Loading from "../Effects/Loading";
 export default function Header() {
-  const { user, setUser } = useUser();
+  const { user } = useUser();
+
+  console.log(user)
   const navigate = useNavigate();
   async function handleLogout() {
     try {
@@ -19,30 +21,30 @@ export default function Header() {
   }
 
   return (
-    <div class="header">
-      <div class="container">
-        <a href="//" class="logo">
+    <div className="header">
+      <div className="container">
+        <a href="//" className="logo">
           Freelancing
         </a>
 
-        <ul class="main-nav">
+        <ul className="main-nav">
           <li>
             <Link to="/">Home</Link>
           </li>
           <li>
             <Link to="/about">About</Link>
           </li>
-          <li>
-            <Link to="/service">Services</Link>
-          </li>
+         {user && user.role !== "Seller" && <li>
+            <Link to="/customer/services">Services</Link>
+          </li>}
           {user && (
             <>
               <li>
                 <Link to="/profile">Profile</Link>
               </li>
-              <li>
-                <Link to="/add_service">Add Service</Link>
-              </li>
+          {   user && user.role !== "Customer" && <li>
+                <Link to="/seller/add_service">Add Service</Link>
+              </li>}
             </>
           )}
           <li style={{ paddingTop: user && "15px" }}>

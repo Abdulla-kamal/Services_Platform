@@ -3,9 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Register.scss'
 import { useState } from 'react';
 import {createUserWithEmailAndPassword} from "firebase/auth";
-import{auth, db} from "../../../Firebase/firebase"
+import{auth, db, storage} from "../../../Firebase/firebase"
 import {setDoc, doc} from "firebase/firestore"
 import {toast} from "react-toastify"
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 export default function Register() {
 const [form, setForm] = useState({
   email: "",
@@ -15,7 +16,7 @@ const [form, setForm] = useState({
   description:"",
   phone:"",
   linkedin:"",
-  role:""
+  role:"Customer"
 })
 const navigate = useNavigate();
 const handleChange= (e)=> {
@@ -23,7 +24,7 @@ const handleChange= (e)=> {
     // Check if the input type is file
     if (type === 'file') {
       // If it's a file input, set the first file in the files array
-      setForm({ ...form, [name]: files[0].name });
+      setForm({ ...form, [name]: files[0] });
     } else {
       // For other input types, just set the value
       setForm({ ...form, [name]: value });
@@ -38,13 +39,23 @@ const user = auth.currentUser;
 console.log(user);
 
 if(user) {
+      // Upload the profile picture to Firebase Storage
+      const pictureRef = ref(storage, `profilePictures/${user.uid}/${form.picture.name}`);
+      await uploadBytes(pictureRef, form.picture); // Upload the file
+
+      // Get the download URL of the uploaded picture
+      const pictureURL = await getDownloadURL(pictureRef);
+
+      
+
+// Save user data in Firestore including the picture URL
   await setDoc(doc(db, "Users", user.uid), {
     email: user.email,
     name: form.name,
     description: form.description,
     phone: form.phone,
     linkedin: form.linkedin,
-    picture: form.picture,
+    picture: pictureURL,
     role: form.role,
     services: [] // Initialize an empty array
   })

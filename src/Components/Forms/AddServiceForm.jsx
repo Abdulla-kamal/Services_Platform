@@ -1,16 +1,33 @@
 import "./Form.css";
 import { arrayUnion, doc, updateDoc } from "firebase/firestore";
-import { auth, db } from "../../Firebase/firebase";
+import { auth, db, storage } from "../../Firebase/firebase";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-const addServiceToUser = async (service) => {
-  const user = auth.currentUser;
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+const addServiceToUser  = async (service, setRefresh) => {
+  const user = auth.currentUser ;
   if (user) {
+    const pictureURLs = []; // Array to hold the URLs of uploaded pictures
+
+    // Loop through the pictures and upload each one
+    for (let i = 0; i < service.pictures.length; i++) {
+      const pictureRef = ref(storage, `servicePictures/${user.uid}/${service.pictures[i].name}`);
+      await uploadBytes(pictureRef, service.pictures[i]); // Upload the file
+      const pictureURL = await getDownloadURL(pictureRef); // Get the download URL
+      pictureURLs.push(pictureURL); // Store the URL
+    }
+
     const userRef = doc(db, "Users", user.uid);
     await updateDoc(userRef, {
-      services: arrayUnion(service), // Use arrayUnion to add the item to the array
+      services: arrayUnion({
+        ...service,
+        pictures: pictureURLs, // Save the array of picture URLs
+      }),
     });
+
+    setRefresh(prev => !prev);
+    setTimeout(() => setRefresh(false), 0);
     toast.success("Service added successfully", {
       position: "top-center",
     });
@@ -21,50 +38,52 @@ export default function AddServiceForm() {
   const [newService, setNewService] = useState({
     name: "",
     description: "",
-    picture_1: "",
-    picture_2: "",
-    picture_3: "",
+    pictures: [],
     price: "",
     projects_link: "",
   });
-
-  const handleAddItem = (e) => {
+  const [refresh, setRefresh] = useState(false);
+  const handleAddService = (e) => {
     e.preventDefault();
-    addServiceToUser(newService);
+    addServiceToUser(newService, setRefresh);
 
     setNewService({
       // Clear the input after adding
       name: "",
       description: "",
-      picture_1: "",
-      picture_2: "",
-      picture_3: "",
+      pictures: [], // Change to an array to hold multiple pictures
       price: "",
       projects_link: "",
     });
   };
 
+  useEffect(() => {
+    if (refresh) {
+      window.location.reload();
+    }
+  }, [refresh]);
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
-    // Check if the input type is file
     if (type === "file") {
-      // If it's a file input, set the first file in the files array
-      setNewService({ ...newService, [name]: files[0].name });
+      // Store files in an array
+      setNewService((prev) => ({
+        ...prev,
+        pictures: [...prev.pictures, files[0]], // Add the new file to the array
+      }));
     } else {
-      // For other input types, just set the value
       setNewService({ ...newService, [name]: value });
     }
   };
 
   return (
-    <newService onSubmit={handleAddItem}>
-      <div class="discount" >
-        <div class="discount-explain">
+    <newService onSubmit={handleAddService}>
+      <div className="discount">
+        <div className="discount-explain">
           <img src="./media/discount.png" alt="" />
-          <h2 class="sub-title">Service</h2>
+          <h2 className="sub-title">Service</h2>
           <p></p>
         </div>
-        <div class="discount-request">
+        <div className="discount-request">
           <Link to="/">
             {" "}
             <button
@@ -83,7 +102,7 @@ export default function AddServiceForm() {
               Home
             </button>
           </Link>
-          <h2 class="sub-title">Add Your Service</h2>
+          <h2 className="sub-title">Add Your Service</h2>
           <form action="">
             <input
               name="name"
@@ -92,9 +111,9 @@ export default function AddServiceForm() {
               value={newService.name}
               onChange={handleChange}
             />
-            <input name="picture_1" type="file" onChange={handleChange} />
-            <input name="picture_2" type="file" onChange={handleChange} />
-            <input name="picture_3" type="file" onChange={handleChange} />
+            <input  type="file" onChange={handleChange} />
+            <input  type="file" onChange={handleChange} />
+            <input  type="file" onChange={handleChange} />
             <input
               name="price"
               type="number"
