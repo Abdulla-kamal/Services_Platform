@@ -1,179 +1,179 @@
-@import '~font-awesome/css/font-awesome.css';
+@import "~font-awesome/css/font-awesome.css";
 /* Start Global rules  */
 body {
-    font-family: "Cairo", sans-serif;
-  }
-  
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  :root {
-    --main-color: #2196f3;
-    --main-color-alt: #1787e0;
-    --main-transition: 0.3s;
-    --main-padding: 100px;
-    --background-color: #ececec;
-  }
-  
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    background:var(--background-color);
-  }
+  font-family: "Cairo", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --main-color: #2196f3;
+  --main-color-alt: #1787e0;
+  --main-transition: 0.3s;
+  --main-padding: 100px;
+  --background-color: #ececec;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--background-color);
+}
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+@media (min-width: 768px) {
   .container {
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 15px;
-    padding-right: 15px;
+    width: 750px;
   }
-  
-  @media (min-width: 768px) {
-    .container {
-      width: 750px;
-    }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
   }
-  @media (min-width: 992px) {
-    .container {
-      width: 970px;
-    }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
   }
-  @media (min-width: 1200px) {
-    .container {
-      width: 1170px;
-    }
+}
+
+.main-title {
+  font-size: 30px;
+  margin: 0 auto 80px;
+  border: solid 2px black;
+  padding: 10px 20px;
+  width: fit-content;
+  text-transform: uppercase;
+  position: relative;
+  transition: var(--main-transition);
+}
+
+.main-title:hover {
+  color: white;
+  border: solid 2px white;
+  transition-delay: 0.5s;
+}
+
+.main-title::before {
+  content: "";
+  position: absolute;
+  background-color: var(--main-color);
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  top: 50%;
+  left: -30px;
+  transform: translateY(-50%);
+  transition: var(--main-transition);
+}
+
+.main-title::after {
+  content: "";
+  position: absolute;
+  background-color: var(--main-color);
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  top: 50%;
+  right: -30px;
+  transform: translateY(-50%);
+  transition: var(--main-transition);
+}
+
+.main-title:hover::before {
+  z-index: -1;
+  animation: move-left 0.5s linear forwards;
+}
+
+.main-title:hover::after {
+  z-index: -1;
+  animation: move-right 0.5s linear forwards;
+}
+
+.sub-title {
+  font-size: 40px;
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 1;
+}
+/* End Global rules  */
+
+/* Animation  */
+@keyframes image-move {
+  0% {
+    top: 0;
   }
-  
-  .main-title {
-    font-size: 30px;
-    margin: 0 auto 80px;
-    border: solid 2px black;
-    padding: 10px 20px;
-    width: fit-content;
-    text-transform: uppercase;
-    position: relative;
-    transition: var(--main-transition);
+
+  50% {
+    top: -50px;
   }
-  
-  .main-title:hover {
-    color: white;
-    border: solid 2px white;
-    transition-delay: 0.5s;
+
+  100% {
+    top: 0;
   }
-  
-  .main-title::before {
-    content: "";
-    position: absolute;
-    background-color: var(--main-color);
+}
+
+@keyframes move-left {
+  50% {
+    left: 0;
     height: 12px;
     width: 12px;
-    border-radius: 50%;
-    top: 50%;
-    left: -30px;
-    transform: translateY(-50%);
-    transition: var(--main-transition);
   }
-  
-  .main-title::after {
-    content: "";
-    position: absolute;
-    background-color: var(--main-color);
+
+  100% {
+    left: 0;
+    height: 100%;
+    width: 50%;
+    border-radius: 0;
+  }
+}
+@keyframes move-right {
+  50% {
+    right: 0;
     height: 12px;
     width: 12px;
-    border-radius: 50%;
-    top: 50%;
-    right: -30px;
-    transform: translateY(-50%);
-    transition: var(--main-transition);
-  }
-  
-  .main-title:hover::before {
-    z-index: -1;
-    animation: move-left 0.5s linear forwards;
-  }
-  
-  .main-title:hover::after {
-    z-index: -1;
-    animation: move-right 0.5s linear forwards;
-  }
-  
-  .sub-title {
-    font-size: 40px;
-    width: fit-content;
-    margin: auto;
-    margin-bottom: 40px;
-    position: relative;
-    z-index: 1;
-  }
-  /* End Global rules  */
-
-  /* Animation  */
-  @keyframes image-move {
-    0% {
-      top: 0;
-    }
-  
-    50% {
-      top: -50px;
-    }
-  
-    100% {
-      top: 0;
-    }
-  }
-  
-  
-  @keyframes move-left {
-    50% {
-      left: 0;
-      height: 12px;
-      width: 12px;
-    }
-  
-    100% {
-      left: 0;
-      height: 100%;
-      width: 50%;
-      border-radius: 0;
-    }
-  }
-  @keyframes move-right {
-    50% {
-      right: 0;
-      height: 12px;
-      width: 12px;
-    }
-  
-    100% {
-      right: 0;
-      height: 100%;
-      width: 50%;
-      border-radius: 0;
-    }
   }
 
-  @keyframes chamge-image {
-    0%, 100% {
-      background-image: url('../public/media/discount-background1.jpg');
-    }
-  
-    50% {
-      background-image: url('../public/media/discount-background2.jpg');
-    }
+  100% {
+    right: 0;
+    height: 100%;
+    width: 50%;
+    border-radius: 0;
   }
-  /* Animation  */
+}
 
-  /* Start Loading Spin */
+@keyframes chamge-image {
+  0%,
+  100% {
+    background-image: url("../public/media/discount-background1.jpg");
+  }
+
+  50% {
+    background-image: url("../public/media/discount-background2.jpg");
+  }
+}
+/* Animation  */
+
+/* Start Loading Spin */
 
 .lds-ripple,
 .lds-ripple div {
@@ -229,5 +229,39 @@ body {
   }
 }
 
-
 /* End Loading Spin */
+
+/*Globally */
+.btns {
+  display: flex;
+  justify-content: space-around;
+}
+
+.btns .fav {
+  background-color: pink !important;
+  transition: 0.3s;
+}
+.btns .fav:hover {
+  background-color: rgb(238, 43, 75)  !important;
+}
+.btns .del {
+  background-color: #f94848 !important;
+  transition: 0.3s;
+}
+.btns .del:hover {
+  background-color: #f31515 !important;
+}
+
+
+/* There is no data  */
+.empty {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  color: gray;
+}
+
+/*Globally */

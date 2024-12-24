@@ -15,7 +15,7 @@ export const truncateDescription = (description) => {
 export default function Service({ data }) {
   const { user } = useUser();
   const [refresh, setRefresh] = useState(false);
-
+// console.log(user)
   // console.log(data);
   useEffect(() => {
     if (refresh) {
@@ -24,8 +24,8 @@ export default function Service({ data }) {
   }, [refresh]);
   // console.log(data)
   // Delete The Spedific Service
+  const currentUser = auth.currentUser;
   const handleDeleteService = async (index) => {
-    const currentUser = auth.currentUser;
     const dataRef = doc(db, "Users", currentUser.uid); // Reference to the data document
 
     // Assuming `services[index]` is the service object you want to delete
@@ -87,15 +87,16 @@ console.log('User services:', data.services);/defaultService.jpg"
               <div className="info" style={{ padding: "10px" }}>
                 <h3 style={{ marginTop: "20px" }}>{box.name}</h3>
                 <p>{truncateDescription(box.description)}</p>
-                {/* <Link to="/serviceDetails">
+              { user.role === "Seller" && <Link to={`/serviceDetails/${currentUser.uid}&${index}`}>
                   <button style={{ marginRight: "20px" }}>Details</button>
-                </Link> */}
+                </Link>}
 
                 {user.role === "Seller" && (
                   <button onClick={() => handleDeleteService(index)}>
                     Delete
                   </button>
                 )}
+           
                 {/* {console.log(data)} */}
               </div>
             </div>

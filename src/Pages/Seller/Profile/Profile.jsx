@@ -53,7 +53,7 @@ export default function Profile() {
                   </div>
                 </div>
               </div>
-              {user.services && <Service data={user} />}
+             {user && user.role !=="Customer" && (user.services && <Service data={user} />)}
             </div>
           </div>
         </>

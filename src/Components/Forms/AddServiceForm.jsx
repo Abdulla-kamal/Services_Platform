@@ -47,14 +47,14 @@ export default function AddServiceForm() {
     e.preventDefault();
     addServiceToUser(newService, setRefresh);
 
-    setNewService({
-      // Clear the input after adding
-      name: "",
-      description: "",
-      pictures: [], // Change to an array to hold multiple pictures
-      price: "",
-      projects_link: "",
-    });
+    // setNewService({
+    //   // Clear the input after adding
+    //   name: "",
+    //   description: "",
+    //   pictures: [], // Change to an array to hold multiple pictures
+    //   price: "",
+    //   projects_link: "",
+    // });
   };
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export default function AddServiceForm() {
   };
 
   return (
-    <newService onSubmit={handleAddService}>
+    
       <div className="discount">
         <div className="discount-explain">
           <img src="./media/discount.png" alt="" />
@@ -103,7 +103,7 @@ export default function AddServiceForm() {
             </button>
           </Link>
           <h2 className="sub-title">Add Your Service</h2>
-          <form action="">
+          <form onSubmit={handleAddService}>
             <input
               name="name"
               type="text"
@@ -141,6 +141,6 @@ export default function AddServiceForm() {
           </form>
         </div>
       </div>
-    </newService>
+ 
   );
 }

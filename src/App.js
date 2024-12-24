@@ -13,8 +13,10 @@ import AddServiceForm from "./Components/Forms/AddServiceForm";
 import VisitProfile from "./Pages/Customer/VisitProfile";
 import SellerRoutes from "./RouteProtection/SellerRoutes";
 import CustomerRoutes from "./RouteProtection/CustomerRoutes";
+import Favorites from "./Pages/Customer/Favorites";
 
 function App() {
+  
   return (
     <div className="App">
       <ToastContainer />
@@ -30,6 +32,7 @@ function App() {
         {/* Pages For Customer Only */}
         <Route path="customer" element={<CustomerRoutes />}>
           <Route path="services" element={<DisplayServices />} />
+          <Route path="favorites" element={<Favorites />} />
         </Route>
 
         {/* Pages For Seller Only */}

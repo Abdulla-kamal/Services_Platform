@@ -7,7 +7,6 @@ import Loading from "../Effects/Loading";
 export default function Header() {
   const { user } = useUser();
 
-  console.log(user)
   const navigate = useNavigate();
   async function handleLogout() {
     try {
@@ -34,17 +33,26 @@ export default function Header() {
           <li>
             <Link to="/about">About</Link>
           </li>
-         {user && user.role !== "Seller" && <li>
-            <Link to="/customer/services">Services</Link>
-          </li>}
+          {user && user.role !== "Seller" && (
+            <>
+              <li>
+                <Link to="/customer/services">Services</Link>
+              </li>
+              <li>
+                <Link to="/customer/favorites">Favorites</Link>
+              </li>
+            </>
+          )}
           {user && (
             <>
               <li>
                 <Link to="/profile">Profile</Link>
               </li>
-          {   user && user.role !== "Customer" && <li>
-                <Link to="/seller/add_service">Add Service</Link>
-              </li>}
+              {user && user.role !== "Customer" && (
+                <li>
+                  <Link to="/seller/add_service">Add Service</Link>
+                </li>
+              )}
             </>
           )}
           <li style={{ paddingTop: user && "15px" }}>

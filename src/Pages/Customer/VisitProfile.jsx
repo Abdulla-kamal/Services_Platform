@@ -5,7 +5,6 @@ import { db } from "../../Firebase/firebase";
 import Loading from "../../Components/Effects/Loading";
 import Header from "../../Components/Header/Header";
 import Service from "../../Components/Service/Service";
-
 export default function VisitProfile() {
   const { pathname } = useLocation(); // Get The Path
   const pathhArray = pathname.split("/"); // Convert The Path to Array

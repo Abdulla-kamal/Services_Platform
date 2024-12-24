@@ -57,7 +57,8 @@ if(user) {
     linkedin: form.linkedin,
     picture: pictureURL,
     role: form.role,
-    services: [] // Initialize an empty array
+    services: [], // Initialize an empty array
+    favorites: [] // Initialize an empty array
   })
   navigate("/login");
   console.log("User Registered Successfully");
