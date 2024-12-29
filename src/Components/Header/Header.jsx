@@ -3,11 +3,14 @@ import "./Header.css";
 import { auth } from "../../Firebase/firebase";
 import { useUser } from "../../Context/UserProvider";
 import Cookies from "universal-cookie";
-import Loading from "../Effects/Loading";
+
+
 export default function Header() {
   const { user } = useUser();
 
   const navigate = useNavigate();
+
+// Log out 
   async function handleLogout() {
     try {
       navigate("/login");
@@ -33,6 +36,7 @@ export default function Header() {
           <li>
             <Link to="/about">About</Link>
           </li>
+          {/* Customer  */}
           {user && user.role !== "Seller" && (
             <>
               <li>
@@ -43,11 +47,14 @@ export default function Header() {
               </li>
             </>
           )}
+
+
           {user && (
             <>
               <li>
                 <Link to="/profile">Profile</Link>
               </li>
+              {/* Seller  */}
               {user && user.role !== "Customer" && (
                 <li>
                   <Link to="/seller/add_service">Add Service</Link>

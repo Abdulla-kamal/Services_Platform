@@ -3,13 +3,12 @@ import Register from "./Pages/Auth/Register/Register";
 import Login from "./Pages/Auth/Login/Login";
 import Home from "./Pages/Home/Home";
 import About from "./Pages/About/About";
-import Profile from "./Pages/Seller/Profile/Profile";
-import Service from "./Components/Service/Service";
+import Profile from "./Pages/Profile/Profile";
 import DisplayServices from "./Pages/Customer/DisplayServices";
 import Details from "./Components/Service/Derails";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import AddServiceForm from "./Components/Forms/AddServiceForm";
+import AddServiceForm from "./Pages/Seller/AddService";
 import VisitProfile from "./Pages/Customer/VisitProfile";
 import SellerRoutes from "./RouteProtection/SellerRoutes";
 import CustomerRoutes from "./RouteProtection/CustomerRoutes";
@@ -19,7 +18,11 @@ function App() {
   
   return (
     <div className="App">
-      <ToastContainer />
+      {/* Pop up messages */}
+      <ToastContainer /> 
+
+
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="about" element={<About />} />
@@ -39,8 +42,12 @@ function App() {
         <Route path="seller" element={<SellerRoutes />}>
           <Route path="add_service" element={<AddServiceForm />} />
         </Route>
+        
         <Route path="seller/profile/:id" element={<VisitProfile />} />
       </Routes>
+
+
+
     </div>
   );
 }

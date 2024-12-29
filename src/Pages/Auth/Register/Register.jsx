@@ -7,6 +7,9 @@ import{auth, db, storage} from "../../../Firebase/firebase"
 import {setDoc, doc} from "firebase/firestore"
 import {toast} from "react-toastify"
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+
+
+
 export default function Register() {
 const [form, setForm] = useState({
   email: "",
@@ -34,9 +37,9 @@ const handleChange= (e)=> {
 const handleRegister = async(e)=> {
   e.preventDefault();
   try{
-await createUserWithEmailAndPassword(auth, form.email, form.password);
+await createUserWithEmailAndPassword(auth, form.email, form.password); //Create User 
 const user = auth.currentUser;
-console.log(user);
+
 
 if(user) {
       // Upload the profile picture to Firebase Storage
@@ -74,7 +77,7 @@ toast.error(e.message, {
   }
 }
 
-console.log(form)
+
 
     return(
       <>
@@ -113,7 +116,6 @@ console.log(form)
       <select id="userRole" name="role" value={form.role} onChange={handleChange}>
         <option value="Customer">Customer</option>
         <option value="Seller">Seller</option>
-        <option value="Admin">Admin</option>
       </select>
           <label htmlFor="">Phone Number</label>
           <input

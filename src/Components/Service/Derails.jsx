@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 import Gullery from "./Gullery";
 
 export default function Details() {
-  const [service, setService] = useState(null);
+  const [service, setService] = useState(null); //Local State 
   const {id} = useParams(); //Fetch the useId and Index Service from The link 
   const array = id.split('&'); //Split them
   const userId = array[0];
   const serviceIndex = array[1]
 
-console.log(service)
+
 const fetchServiceDetails = async () => {
   try {
     const userDoc = doc(db, "Users", userId);
@@ -31,12 +31,16 @@ const fetchServiceDetails = async () => {
 };
 
 useEffect(()=> {
-  fetchServiceDetails()
-}, [userId, serviceIndex])
+  fetchServiceDetails();
+}, [userId, serviceIndex]);
+
     return(
         <>
         <Header/>
         {service && service.pictures.length > 0 && <Gullery pictures = {service && service.pictures}/>}
+
+
+        
         <div class="pricing" id="pricing">
       <img class="right" src="./media/dots.png" alt="" />
       <img class="left" src="./media/dots.png" alt="" />

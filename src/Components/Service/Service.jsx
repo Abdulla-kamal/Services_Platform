@@ -1,10 +1,13 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Service.scss";
 import { useUser } from "../../Context/UserProvider";
 import { toast } from "react-toastify";
 import { arrayRemove, doc, updateDoc } from "firebase/firestore";
 import { auth, db } from "../../Firebase/firebase";
 import { useEffect, useState } from "react";
+
+// Normal Function 
+// This Function Using To Place Three Dots (...) If the describtion is long 
 export const truncateDescription = (description) => {
   const words = description.split(" ");
   if (words.length > 10) {
@@ -12,25 +15,31 @@ export const truncateDescription = (description) => {
   }
   return description;
 };
+
+
+// Component :
 export default function Service({ data }) {
-  const { user } = useUser();
+  const { user } = useUser(); // Global 
+
   const [refresh, setRefresh] = useState(false);
-// console.log(user)
-  // console.log(data);
+
   useEffect(() => {
     if (refresh) {
       window.location.reload();
     }
   }, [refresh]);
-  // console.log(data)
-  // Delete The Spedific Service
-  const currentUser = auth.currentUser;
+
+  
+
+  const currentUser = auth.currentUser; // From Firebase 
+
+
+
   const handleDeleteService = async (index) => {
     const dataRef = doc(db, "Users", currentUser.uid); // Reference to the data document
 
     // Assuming `services[index]` is the service object you want to delete
     const serviceToDelete = data.services[index]; // Get the service to delete
-
     try {
       await updateDoc(dataRef, {
         services: arrayRemove(serviceToDelete), // Remove the service from the array

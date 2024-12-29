@@ -1,6 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./Login.scss";
-import Register from "../Register/Register";
 import { useState } from "react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../../Firebase/firebase";
@@ -22,6 +21,8 @@ export default function Login() {
     setForm({ ...form, [name]: value });
   };
 
+
+  
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -50,6 +51,9 @@ export default function Login() {
       });
     }
   };
+
+
+
   return (
     <>
       <Link to="/">

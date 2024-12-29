@@ -41,6 +41,11 @@ export default function DisplayServices() {
     };
 
     fetchAllServices(); // Call the function to fetch services
+
+    const storedFavorites = localStorage.getItem("favorites");
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
+    }
   }, []);
 
   const handleFavorite = (service, serviceIndex) => {

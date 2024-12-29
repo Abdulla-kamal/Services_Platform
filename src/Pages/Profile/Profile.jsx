@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import Header from "../../../Components/Header/Header";
-import Service from "../../../Components/Service/Service";
+import Header from "../../Components/Header/Header";
+import Service from "../../Components/Service/Service";
 import "./Profile.scss";
-import { auth, db } from "../../../Firebase/firebase";
+import { auth, db } from "../../Firebase/firebase";
 import { doc, getDoc } from "firebase/firestore";
-import Loading from "../../../Components/Effects/Loading";
-import { useUser } from "../../../Context/UserProvider";
+import Loading from "../../Components/Effects/Loading";
+import { useUser } from "../../Context/UserProvider";
 
 export default function Profile() {
   const { user } = useUser();

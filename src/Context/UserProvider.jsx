@@ -6,6 +6,8 @@ const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const [user, setUser ] = useState(null);
+
+
 useEffect(()=> {
   const unsubscribe = auth.onAuthStateChanged(async(user) => {
     if (user) {
@@ -19,6 +21,7 @@ useEffect(()=> {
         console.log("No such document!");
         setUser (null); // Set user to null if no document exists
       }
+      
     } else {
       // User is logged out
       setUser (null);
